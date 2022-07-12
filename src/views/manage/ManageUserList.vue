@@ -105,11 +105,12 @@
 
 <script>
 import avatar1 from '@/assets/images/avatars/1.jpg'
-import avatar2 from '@/assets/images/avatars/2.jpg'
-import avatar3 from '@/assets/images/avatars/3.jpg'
-import avatar4 from '@/assets/images/avatars/4.jpg'
-import avatar5 from '@/assets/images/avatars/5.jpg'
-import avatar6 from '@/assets/images/avatars/6.jpg'
+// import avatar2 from '@/assets/images/avatars/2.jpg'
+// import avatar3 from '@/assets/images/avatars/3.jpg'
+// import avatar4 from '@/assets/images/avatars/4.jpg'
+// import avatar5 from '@/assets/images/avatars/5.jpg'
+// import avatar6 from '@/assets/images/avatars/6.jpg'
+import axios from 'axios'
 
 export default {
   name: 'ManageHomeList',
@@ -119,71 +120,27 @@ export default {
       visible: true,
     }
   },
-  setup() {
-    const tableUser = [
-      {
+  async mounted() {
+    const response = await axios.get('http://localhost:8000/user')
+    const results = response.data.content
+    const tableUser = []
+    let key = 0
+    results.map((item) => {
+      tableUser[key] = {
         avatar: { src: avatar1, status: 'success' },
         user: {
-          name: 'Yiorgos Avraamu',
+          name: item.name,
           admin: true,
           registered: 'Jan 1, 2021',
         },
         numberOfManagers: '2',
         activity: '10 sec ago',
         permission: true,
-      },
-      {
-        avatar: { src: avatar2, status: 'danger' },
-        user: {
-          name: 'Avram Tarasios',
-          admin: false,
-          registered: 'Jan 1, 2021',
-        },
-        numberOfManagers: '2',
-        activity: '5 minutes ago',
-        permission: false,
-      },
-      {
-        avatar: { src: avatar3, status: 'warning' },
-        user: { name: 'Quintin Ed', admin: true, registered: 'Jan 1, 2021' },
-        numberOfManagers: '2',
-        activity: '1 hour ago',
-        permission: false,
-      },
-      {
-        avatar: { src: avatar4, status: 'secondary' },
-        user: { name: 'Enéas Kwadwo', admin: true, registered: 'Jan 1, 2021' },
-        numberOfManagers: '2',
-        activity: 'Last month',
-        permission: false,
-      },
-      {
-        avatar: { src: avatar5, status: 'success' },
-        user: {
-          name: 'Agapetus Tadeáš',
-          admin: true,
-          registered: 'Jan 1, 2021',
-        },
-        numberOfManagers: '2',
-        activity: 'Last week',
-        permission: true,
-      },
-      {
-        avatar: { src: avatar6, status: 'danger' },
-        user: {
-          name: 'Friderik Dávid',
-          admin: true,
-          registered: 'Jan 1, 2021',
-        },
-        numberOfManagers: '2',
-        activity: 'Last week',
-        permission: true,
-      },
-    ]
-
-    return {
-      tableUser,
-    }
+      }
+      key++
+    })
+    console.log(tableUser)
+    return { tableUser }
   },
 }
 </script>
