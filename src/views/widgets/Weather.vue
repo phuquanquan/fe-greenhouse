@@ -160,7 +160,6 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  height: 710px;
   background: rgb(254, 219, 101);
   background: linear-gradient(
     360deg,
