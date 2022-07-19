@@ -11,7 +11,7 @@ export default createStore({
       state.sidebarVisible = true
     },
     toggleUnfoldable(state) {
-      state.sidebarUnfoldable = !state.sidebarUnfoldable
+      state.sidebarUnfoldable = false
     },
     updateSidebarVisible(state, payload) {
       state.sidebarVisible = payload.value

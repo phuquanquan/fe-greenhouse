@@ -108,66 +108,6 @@ export default {
         },
         activity: false,
       },
-      {
-        user: {
-          name: 'Điều hòa nhiệt độ',
-          serial: 'dfadfdfdsf42343432432',
-          address: 'Phòng khách, VinHome Smart City',
-        },
-        usage: {
-          value: Math.round((22 / 30) * 100),
-          color: 'info',
-        },
-        activity: true,
-      },
-      {
-        user: {
-          name: 'Rèm cửa',
-          serial: 'dfadfdfdsf42343432432',
-          address: 'Phòng master',
-        },
-        usage: {
-          value: Math.round((74 / 120) * 100),
-          color: 'warning',
-        },
-        activity: false,
-      },
-      {
-        user: {
-          name: 'Bóng đèn',
-          serial: 'dfadfdfdsf42343432432',
-          address: 'Phòng bếp',
-        },
-        usage: {
-          value: Math.round((98 / 1000) * 100),
-          color: 'danger',
-        },
-        activity: true,
-      },
-      {
-        user: {
-          name: 'Bóng đèn',
-          serial: 'dfadfdfdsf42343432432',
-          address: 'Phòng xyz',
-        },
-        usage: {
-          value: 22,
-          color: 'primary',
-        },
-        activity: false,
-      },
-      {
-        user: {
-          name: 'Bình nóng lạnh',
-          serial: 'dfadfdfdsf42343432432',
-          address: 'Phòng ABC',
-        },
-        usage: {
-          value: 43,
-          color: 'success',
-        },
-        activity: true,
-      },
     ]
 
     return {

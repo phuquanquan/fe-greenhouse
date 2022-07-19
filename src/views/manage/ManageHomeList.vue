@@ -17,6 +17,11 @@
                   Search
                 </button>
                 <CButton
+                  @click="
+                    () => {
+                      visibleVerticallyCenteredDemo = true
+                    }
+                  "
                   component="input"
                   type="button"
                   color="success"
@@ -31,6 +36,7 @@
             <CTableHead color="light">
               <CTableRow>
                 <CTableHeaderCell class="text-center">STT</CTableHeaderCell>
+                <CTableHeaderCell>Mã nhà thông minh</CTableHeaderCell>
                 <CTableHeaderCell>Tên nhà thông minh</CTableHeaderCell>
                 <CTableHeaderCell class="text-center"
                   >Ngày cập nhật</CTableHeaderCell
@@ -52,6 +58,9 @@
               <CTableRow v-for="(item, key) in tableSmartHome" :key="item.name">
                 <CTableDataCell class="text-center">
                   {{ key + 1 }}
+                </CTableDataCell>
+                <CTableDataCell>
+                  <div>{{ item.user.name }}</div>
                 </CTableDataCell>
                 <CTableDataCell>
                   <div>{{ item.user.name }}</div>
@@ -100,18 +109,149 @@
       </CCard>
     </CCol>
   </CRow>
+
+  <!--Modal-->
+  <CModal
+    size="xl"
+    alignment="center"
+    :visible="visibleVerticallyCenteredDemo"
+    @close="
+      () => {
+        visibleVerticallyCenteredDemo = false
+      }
+    "
+  >
+    <CModalHeader>
+      <CModalTitle>Thêm nhà kính</CModalTitle>
+    </CModalHeader>
+    <CModalBody>
+      <CForm class="row g-3">
+        <CRow>
+          <CCol class="position-relative">
+            <CFormLabel for="validationTooltipUsername">Mã nhà kính</CFormLabel>
+            <CInputGroup class="has-validation">
+              <CInputGroupText id="inputGroupPrepend">@</CInputGroupText>
+              <CFormInput
+                id="validationTooltipUsername"
+                value=""
+                aria-describedby="inputGroupPrepend"
+                required
+              />
+              <CFormFeedback tooltip invalid>
+                Please choose a username.
+              </CFormFeedback>
+            </CInputGroup>
+          </CCol>
+          <CCol class="position-relative">
+            <CFormLabel for="validationTooltip05">Tên nhà kính</CFormLabel>
+            <CFormInput id="validationTooltip05" required />
+            <CFormFeedback tooltip invalid>
+              Please provide a valid zip.
+            </CFormFeedback>
+          </CCol>
+          <CCol class="position-relative">
+            <CFormLabel for="validationTooltip05">Mã ph</CFormLabel>
+            <CFormInput id="validationTooltip05" required />
+            <CFormFeedback tooltip invalid>
+              Please provide a valid zip.
+            </CFormFeedback>
+          </CCol>
+        </CRow>
+        <CRow>
+          <CCol class="position-relative">
+            <CFormLabel for="validationTooltip05">Địa chỉ</CFormLabel>
+            <CFormInput id="validationTooltip05" required />
+            <CFormFeedback tooltip invalid>
+              Please provide a valid zip.
+            </CFormFeedback>
+          </CCol>
+        </CRow>
+        <CFormLabel for="basic-url">Các thiết bị có trong nhà:</CFormLabel>
+        <CRow v-for="item in (1, 2, 3)" :key="item">
+          <CInputGroup class="mb-3">
+            <CDropdown variant="input-group">
+              <CDropdownToggle color="secondary" variant="outline"
+                >Chọn thiết bị</CDropdownToggle
+              >
+              <CDropdownMenu>
+                <CDropdownItem>Máy bơm</CDropdownItem>
+                <CDropdownItem>Đèn điện</CDropdownItem>
+                <CDropdownItem>Quạt điện</CDropdownItem>
+                <CDropdownDivider />
+                <CDropdownItem>Thiết bị khác</CDropdownItem>
+              </CDropdownMenu>
+            </CDropdown>
+            <CFormInput
+              placeholder="Nhập serial thiết bị tại đây để kết nối"
+              aria-label="Text input with dropdown button"
+            />
+            <CButton type="button" color="primary" variant="outline"
+              >Connect</CButton
+            >
+          </CInputGroup>
+        </CRow>
+        <CRow>
+          <CCol xs="12">
+            <CFormCheck
+              feedbackInvalid="You must agree before submitting."
+              id="invalidCheck"
+              label="Xác nhận thêm mới/thay đổi nhà kính thông minh"
+              required
+              type="checkbox"
+            />
+          </CCol>
+        </CRow>
+      </CForm>
+    </CModalBody>
+    <CModalFooter>
+      <CButton
+        color="secondary"
+        @click="
+          () => {
+            visibleVerticallyCenteredDemo = false
+          }
+        "
+      >
+        Close
+      </CButton>
+      <CButton color="primary">Save changes</CButton>
+    </CModalFooter>
+  </CModal>
 </template>
 
 <script>
 export default {
   name: 'ManageHomeList',
   components: {},
+  methods: {
+    /**
+     * Mở dialog thêm tài khoản quản lý nhà kính
+     * Author: Trần Phú Quân
+     */
+    btnAddUserOnClick() {
+      //this.formMode = 0
+      this.showDialog(true)
+    },
+    /**
+     * Hàm mở (đóng) dialog
+     * Author: Trần Phú Quân
+     */
+    showDialog(isShow) {
+      this.IsShowDialog = isShow
+    },
+  },
   data() {
     return {
+      // Biến xác định dialog mở hay đóng
+      IsShowDialog: false,
+      // Biến xác định form thêm mới hay sửa (0 là thêm mới, 1 là sửa)
+      formMode: 0,
+      //FormMode,
       visible: true,
+      visibleVerticallyCenteredDemo: false,
     }
   },
-  setup() {
+  async mounted() {
     const tableSmartHome = [
       {
         user: {
@@ -127,76 +267,6 @@ export default {
         },
         activity: '10 sec ago',
       },
-      {
-        user: {
-          name: 'Vinhome Smart City 25-15A',
-          registered: 'Jan 1, 2021',
-          address: '72A Nguyễn Trãi, Thượng Đình, Thanh Xuân, Hà Nội',
-        },
-        usage: {
-          value: Math.round((22 / 30) * 100),
-          color: 'info',
-          temperature: '30',
-          humidity: Math.round((40 / 100) * 100),
-        },
-        activity: '5 minutes ago',
-      },
-      {
-        user: {
-          name: 'Quintin Ed',
-          registered: 'Jan 1, 2021',
-          address: '72A Nguyễn Trãi, Thượng Đình, Thanh Xuân, Hà Nội',
-        },
-        usage: {
-          value: Math.round((74 / 120) * 100),
-          color: 'warning',
-          temperature: '30',
-          humidity: Math.round((40 / 100) * 100),
-        },
-        activity: '1 hour ago',
-      },
-      {
-        user: {
-          name: 'Metro 20-12',
-          registered: 'Jan 1, 2021',
-          address: '72A Nguyễn Trãi, Thượng Đình, Thanh Xuân, Hà Nội',
-        },
-        usage: {
-          value: Math.round((98 / 1000) * 100),
-          color: 'danger',
-          temperature: '30',
-          humidity: Math.round((40 / 100) * 100),
-        },
-        activity: 'Last month',
-      },
-      {
-        user: {
-          name: 'Hotel A25',
-          registered: 'Jan 1, 2021',
-          address: '72A Nguyễn Trãi, Thượng Đình, Thanh Xuân, Hà Nội',
-        },
-        usage: {
-          value: 22,
-          color: 'primary',
-          temperature: '30',
-          humidity: Math.round((40 / 100) * 100),
-        },
-        activity: 'Last week',
-      },
-      {
-        user: {
-          name: 'Ocean Park',
-          registered: 'Jan 1, 2021',
-          address: '72A Nguyễn Trãi, Thượng Đình, Thanh Xuân, Hà Nội',
-        },
-        usage: {
-          value: 43,
-          color: 'success',
-          temperature: '30',
-          humidity: Math.round((40 / 100) * 100),
-        },
-        activity: 'Last week',
-      },
     ]
 
     return {
@@ -205,3 +275,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.col {
+  padding-top: 16px;
+}
+</style>
