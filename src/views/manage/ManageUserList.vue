@@ -239,6 +239,7 @@ export default {
       //FormMode,
       visible: true,
       visibleVerticallyCenteredDemo: false,
+      tableUser: [],
     }
   },
   async mounted() {
@@ -261,6 +262,7 @@ export default {
       key++
     })
     console.log(tableUser)
+    this.tableUser = tableUser
     return { tableUser }
   },
 }

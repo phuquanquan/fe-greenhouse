@@ -167,7 +167,8 @@
           </CCol>
         </CRow>
         <CFormLabel for="basic-url">Các thiết bị có trong nhà:</CFormLabel>
-        <CRow v-for="item in (1, 2, 3)" :key="item">
+        <CRow v-for="item in (1, 2, 3, 4, 5
+        )" :key="item">
           <CInputGroup class="mb-3">
             <CDropdown variant="input-group">
               <CDropdownToggle color="secondary" variant="outline"
@@ -220,6 +221,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'ManageHomeList',
   components: {},
@@ -249,26 +251,34 @@ export default {
       //FormMode,
       visible: true,
       visibleVerticallyCenteredDemo: false,
+      tableSmartHome: [],
     }
   },
+
   async mounted() {
-    const tableSmartHome = [
-      {
+    const response = await axios.get('http://localhost:8000/green-houses')
+    const results = response.data.content
+    const tableSmartHome = []
+    let key = 0
+    results.map((item) => {
+      tableSmartHome[key] = {
         user: {
-          name: 'Vinhome Royal City 28-22',
-          registered: 'Jan 1, 2021',
-          address: '72A Nguyễn Trãi, Thượng Đình, Thanh Xuân, Hà Nội',
+          name: item.name,
+          registered: item.device.length,
+          address: item.address,
         },
         usage: {
-          value: Math.round((40 / 100) * 100),
+          value: item.device.length,
           color: 'success',
-          temperature: '30',
-          humidity: Math.round((40 / 100) * 100),
+          temperature: item.device[0].value,
+          humidity: Math.round((item.device[1].value / 100) * 100),
         },
         activity: '10 sec ago',
-      },
-    ]
-
+      }
+      key++
+    })
+    console.log(tableSmartHome)
+    this.tableSmartHome = tableSmartHome
     return {
       tableSmartHome,
     }
