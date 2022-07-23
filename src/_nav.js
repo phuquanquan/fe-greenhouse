@@ -15,7 +15,7 @@ export default [
   },
   {
     component: 'CNavItem',
-    name: 'Quản lý nhà thông minh',
+    name: 'Quản lý nhà kính',
     to: '/manage/homelist',
     icon: 'cil-house',
   },

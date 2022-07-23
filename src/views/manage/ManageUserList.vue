@@ -5,7 +5,7 @@
         <CHeader>
           <CContainer fluid>
             <CHeaderBrand href="#"
-              >Danh sách tài khoản quản lý nhà thông minh</CHeaderBrand
+              >Danh sách tài khoản quản lý nhà kính</CHeaderBrand
             >
             <CHeaderToggler @click="visible = !visible" />
             <CCollapse class="header-collapse" :visible="visible">
@@ -38,21 +38,16 @@
             <CTableHead color="light">
               <CTableRow>
                 <CTableHeaderCell class="text-center">STT</CTableHeaderCell>
-                <CTableHeaderCell class="text-center">User</CTableHeaderCell>
-                <CTableHeaderCell>Tên tài khoản</CTableHeaderCell>
+                <CTableHeaderCell class="text-center"
+                  >Tên quản lý</CTableHeaderCell
+                >
+                <CTableHeaderCell class="text-center"
+                  >Số điện thoại</CTableHeaderCell
+                >
                 <CTableHeaderCell class="text-center"
                   >Loại tài khoản</CTableHeaderCell
                 >
-                <CTableHeaderCell class="text-center"
-                  >Số lượng nhà quản lý</CTableHeaderCell
-                >
-                <CTableHeaderCell>Hoạt động</CTableHeaderCell>
-                <CTableHeaderCell class="text-center"
-                  >Cấp quyền</CTableHeaderCell
-                >
-                <CTableHeaderCell class="text-center"
-                  >Chức năng</CTableHeaderCell
-                >
+                <CTableHeaderCell>Địa chỉ</CTableHeaderCell>
               </CTableRow>
             </CTableHead>
             <CTableBody>
@@ -70,24 +65,16 @@
                 <CTableDataCell>
                   <div>{{ item.user.name }}</div>
                   <div class="small text-medium-emphasis">
-                    <span>Add</span> :
-                    {{ item.user.registered }}
+                    <span>Điện thoại</span> :
+                    {{ item.user.phone }}
                   </div>
                 </CTableDataCell>
                 <CTableDataCell class="text-center">
                   <span>{{ item.user.admin ? 'Admin' : 'Thành viên' }}</span>
                 </CTableDataCell>
-                <CTableDataCell class="text-center">
-                  <div>{{ item.numberOfManagers }}</div>
-                </CTableDataCell>
                 <CTableDataCell>
-                  <div class="small text-medium-emphasis">Last login</div>
-                  <strong>{{ item.activity }}</strong>
-                </CTableDataCell>
-                <CTableDataCell class="text-center">
-                  <span>{{
-                    item.permission ? 'Đã cấp quyền' : 'Chưa cấp quyền'
-                  }}</span>
+                  <div class="small text-medium-emphasis">Địa chỉ</div>
+                  <strong>{{ item.address }}</strong>
                 </CTableDataCell>
                 <CTableDataCell class="text-center">
                   <CButtonGroup
@@ -253,11 +240,9 @@ export default {
         user: {
           name: item.name,
           admin: true,
-          registered: 'Jan 1, 2021',
+          phone: item.phone,
         },
-        numberOfManagers: '2',
-        activity: '10 sec ago',
-        permission: true,
+        address: item.address,
       }
       key++
     })

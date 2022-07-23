@@ -36,11 +36,7 @@
             <CTableHead color="light">
               <CTableRow>
                 <CTableHeaderCell class="text-center">STT</CTableHeaderCell>
-                <CTableHeaderCell>Mã nhà thông minh</CTableHeaderCell>
                 <CTableHeaderCell>Tên nhà thông minh</CTableHeaderCell>
-                <CTableHeaderCell class="text-center"
-                  >Ngày cập nhật</CTableHeaderCell
-                >
                 <CTableHeaderCell class="text-center">Địa chỉ</CTableHeaderCell>
                 <CTableHeaderCell class="text-center"
                   >Số thiết bị đang hoạt động</CTableHeaderCell
@@ -150,7 +146,7 @@
             </CFormFeedback>
           </CCol>
           <CCol class="position-relative">
-            <CFormLabel for="validationTooltip05">Mã ph</CFormLabel>
+            <CFormLabel for="validationTooltip05">Diện tích</CFormLabel>
             <CFormInput id="validationTooltip05" required />
             <CFormFeedback tooltip invalid>
               Please provide a valid zip.
@@ -167,8 +163,7 @@
           </CCol>
         </CRow>
         <CFormLabel for="basic-url">Các thiết bị có trong nhà:</CFormLabel>
-        <CRow v-for="item in (1, 2, 3, 4, 5
-        )" :key="item">
+        <CRow v-for="item in (1, 2, 3, 4, 5)" :key="item">
           <CInputGroup class="mb-3">
             <CDropdown variant="input-group">
               <CDropdownToggle color="secondary" variant="outline"
@@ -178,8 +173,9 @@
                 <CDropdownItem>Máy bơm</CDropdownItem>
                 <CDropdownItem>Đèn điện</CDropdownItem>
                 <CDropdownItem>Quạt điện</CDropdownItem>
+                <CDropdownItem>CẢm biến nhiệt độ</CDropdownItem>
+                <CDropdownItem>Cảm biến độ ẩm</CDropdownItem>
                 <CDropdownDivider />
-                <CDropdownItem>Thiết bị khác</CDropdownItem>
               </CDropdownMenu>
             </CDropdown>
             <CFormInput
