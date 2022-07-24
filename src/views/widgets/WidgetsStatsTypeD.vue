@@ -10,7 +10,7 @@
         ]"
       >
         <template #icon
-          ><CIcon icon="cib-facebook" height="52" class="my-4 text-white"
+          ><CIcon icon="cib-apache-airflow" height="52" class="my-4 text-white"
         /></template>
       </CWidgetStatsD>
     </CCol>
@@ -24,7 +24,7 @@
         ]"
       >
         <template #icon
-          ><CIcon icon="cib-twitter" height="52" class="my-4 text-white"
+          ><CIcon icon="cilLightbulb" height="52" class="my-4 text-white"
         /></template>
       </CWidgetStatsD>
     </CCol>
@@ -38,7 +38,7 @@
         ]"
       >
         <template #icon
-          ><CIcon icon="cib-linkedin" height="52" class="my-4 text-white"
+          ><CIcon icon="cibCodewars" height="52" class="my-4 text-white"
         /></template>
       </CWidgetStatsD>
     </CCol>
