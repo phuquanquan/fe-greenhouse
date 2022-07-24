@@ -39,55 +39,6 @@ const routes = [
         name: 'Quản lý danh sách tài khoản',
         component: () => import('@/views/manage/ManageUserList.vue'),
       },
-      {
-        path: '/manual',
-        name: 'Thủ công',
-        component: {
-          render() {
-            return h(resolveComponent('router-view'))
-          },
-        },
-        redirect: '/manual/light',
-        children: [
-          {
-            path: '/manual/light',
-            name: 'Đèn điện',
-            component: () => import('@/views/control/manual/GLight.vue'),
-          },
-          {
-            path: '/manual/electric-fan',
-            name: 'Quạt điện',
-            component: () => import('@/views/control/manual/GElectricFan.vue'),
-          },
-          {
-            path: '/manual/water-pump',
-            name: 'Bơm nước',
-            component: () => import('@/views/control/manual/GWaterPump.vue'),
-          },
-        ],
-      },
-      {
-        path: '/automatic',
-        name: 'Tự động',
-        component: {
-          render() {
-            return h(resolveComponent('router-view'))
-          },
-        },
-        redirect: '/automatic/timer',
-        children: [
-          {
-            path: '/automatic/timer',
-            name: 'Hẹn giờ',
-            component: () => import('@/views/control/automatic/GTimer.vue'),
-          },
-          {
-            path: '/automatic/sensor',
-            name: 'Cảm biến',
-            component: () => import('@/views/control/automatic/GSensor.vue'),
-          },
-        ],
-      },
     ],
   },
   {

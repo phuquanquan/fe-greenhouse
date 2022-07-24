@@ -31,49 +31,4 @@ export default [
     to: '/manage/userlist',
     icon: 'cil-user',
   },
-  {
-    component: 'CNavTitle',
-    name: 'Điều khiển',
-  },
-  {
-    component: 'CNavGroup',
-    name: 'Thủ công',
-    to: '/manual',
-    icon: 'cil-puzzle',
-    items: [
-      {
-        component: 'CNavItem',
-        name: 'Đèn điện',
-        to: '/manual/light',
-      },
-      {
-        component: 'CNavItem',
-        name: 'Quạt điện',
-        to: '/manual/electric-fan',
-      },
-      {
-        component: 'CNavItem',
-        name: 'Bơm nước',
-        to: '/manual/water-pump',
-      },
-    ],
-  },
-  {
-    component: 'CNavGroup',
-    name: 'Tự động',
-    to: '/automatic',
-    icon: 'cil-cursor',
-    items: [
-      {
-        component: 'CNavItem',
-        name: 'Hẹn giờ',
-        to: '/automatic/timer',
-      },
-      {
-        component: 'CNavItem',
-        name: 'Cảm biến',
-        to: '/automatic/sensor',
-      },
-    ],
-  },
 ]
