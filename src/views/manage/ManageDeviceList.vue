@@ -122,5 +122,29 @@ export default {
     this.tableSmartHome = tableSmartHome
     return { tableSmartHome }
   },
+  methods: {
+    /**
+     * Mở dialog thêm tài khoản quản lý nhà kính
+     * Author: Trần Phú Quân
+     */
+    async btnAddDeviceOnClick() {
+      //this.formMode = 0
+      await axios.post('http://localhost:8000/device', {
+        name: this.house.name,
+        areage: this.house.areage,
+        userId: this.house.userId,
+        address: this.house.address,
+        device: this.house.device,
+      })
+      this.showDialog(true)
+    },
+    /**
+     * Hàm mở (đóng) dialog
+     * Author: Trần Phú Quân
+     */
+    showDialog(isShow) {
+      this.IsShowDialog = isShow
+    },
+  },
 }
 </script>

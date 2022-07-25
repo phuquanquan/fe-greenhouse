@@ -125,14 +125,22 @@
           </CCol>
           <CCol class="position-relative">
             <CFormLabel for="validationTooltip05">Tên nhà kính</CFormLabel>
-            <CFormInput id="validationTooltip05" required />
+            <CFormInput
+              id="validationTooltip05"
+              v-model="house.name"
+              required
+            />
             <CFormFeedback tooltip invalid>
               Please provide a valid zip.
             </CFormFeedback>
           </CCol>
           <CCol class="position-relative">
             <CFormLabel for="validationTooltip05">Diện tích</CFormLabel>
-            <CFormInput id="validationTooltip05" required />
+            <CFormInput
+              id="validationTooltip05"
+              v-model="house.areage"
+              required
+            />
             <CFormFeedback tooltip invalid>
               Please provide a valid zip.
             </CFormFeedback>
@@ -141,7 +149,11 @@
         <CRow>
           <CCol class="position-relative">
             <CFormLabel for="validationTooltip05">Địa chỉ</CFormLabel>
-            <CFormInput id="validationTooltip05" required />
+            <CFormInput
+              id="validationTooltip05"
+              v-model="house.address"
+              required
+            />
             <CFormFeedback tooltip invalid>
               Please provide a valid zip.
             </CFormFeedback>
@@ -196,7 +208,7 @@
       >
         Close
       </CButton>
-      <CButton color="primary">Save changes</CButton>
+      <CButton @click="btnAddUserOnClick" color="primary">Save changes</CButton>
     </CModalFooter>
   </CModal>
 </template>
@@ -206,23 +218,6 @@ import axios from 'axios'
 export default {
   name: 'ManageHomeList',
   components: {},
-  methods: {
-    /**
-     * Mở dialog thêm tài khoản quản lý nhà kính
-     * Author: Trần Phú Quân
-     */
-    btnAddUserOnClick() {
-      //this.formMode = 0
-      this.showDialog(true)
-    },
-    /**
-     * Hàm mở (đóng) dialog
-     * Author: Trần Phú Quân
-     */
-    showDialog(isShow) {
-      this.IsShowDialog = isShow
-    },
-  },
   data() {
     return {
       // Biến xác định dialog mở hay đóng
@@ -233,7 +228,51 @@ export default {
       visible: true,
       visibleVerticallyCenteredDemo: false,
       tableSmartHome: [],
+      house: {
+        name: '',
+        areage: '',
+        userId: '62c711c4ffeb87048148b94e',
+        address: '',
+        device: [
+          {
+            name: 'Cảm biến độ ẩm',
+            status: false,
+            type: 'sensor',
+            value: 0,
+          },
+          {
+            name: 'Cảm biến nhiệt độ',
+            status: false,
+            type: 'sensor',
+            value: 0,
+          },
+        ],
+      },
     }
+  },
+  methods: {
+    /**
+     * Mở dialog thêm tài khoản quản lý nhà kính
+     * Author: Trần Phú Quân
+     */
+    async btnAddUserOnClick() {
+      //this.formMode = 0
+      await axios.post('http://localhost:8000/green-houses', {
+        name: this.house.name,
+        areage: this.house.areage,
+        userId: this.house.userId,
+        address: this.house.address,
+        device: this.house.device,
+      })
+      this.showDialog(true)
+    },
+    /**
+     * Hàm mở (đóng) dialog
+     * Author: Trần Phú Quân
+     */
+    showDialog(isShow) {
+      this.IsShowDialog = isShow
+    },
   },
 
   async mounted() {
