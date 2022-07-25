@@ -82,7 +82,11 @@
                     aria-label="Button group with nested dropdown"
                   >
                     <CButton color="success">Sửa</CButton>
-                    <CButton color="primary">Xóa</CButton>
+                    <CButton
+                      color="primary"
+                      @click="btnDeleteUserOnClick(item.id)"
+                      >Xóa</CButton
+                    >
                   </CButtonGroup>
                 </CTableDataCell>
               </CTableRow>
@@ -116,21 +120,52 @@
               >Tên tài khoản</CFormLabel
             >
             <CInputGroup class="has-validation">
-              <CInputGroupText id="inputGroupPrepend">@</CInputGroupText>
               <CFormInput
                 id="validationDefaultUsername"
                 aria-describedby="inputGroupPrepend"
                 feedbackInvalid="Please choose a username."
+                v-model="user.name"
                 required
               />
             </CInputGroup>
           </CCol>
-          <CCol class="position-relative">
-            <CFormLabel for="validationTooltip05">User ID</CFormLabel>
-            <CFormInput id="validationTooltip05" disabled="false" required />
-            <CFormFeedback tooltip invalid>
-              Please provide a valid zip.
-            </CFormFeedback>
+          <CCol>
+            <CFormLabel for="validationDefaultUsername">Email</CFormLabel>
+            <CInputGroup class="has-validation">
+              <CFormInput
+                id="validationDefaultUsername"
+                aria-describedby="inputGroupPrepend"
+                feedbackInvalid="Please choose a username."
+                v-model="user.email"
+                required
+              />
+            </CInputGroup>
+          </CCol>
+          <CCol>
+            <CFormLabel for="validationDefaultUsername"
+              >Số điện thoại</CFormLabel
+            >
+            <CInputGroup class="has-validation">
+              <CFormInput
+                id="validationDefaultUsername"
+                aria-describedby="inputGroupPrepend"
+                feedbackInvalid="Please choose a username."
+                v-model="user.phone"
+                required
+              />
+            </CInputGroup>
+          </CCol>
+          <CCol>
+            <CFormLabel for="validationDefaultUsername">Mật khẩu</CFormLabel>
+            <CInputGroup class="has-validation">
+              <CFormInput
+                id="validationDefaultUsername"
+                aria-describedby="inputGroupPrepend"
+                feedbackInvalid="Please choose a username."
+                v-model="user.pass"
+                required
+              />
+            </CInputGroup>
           </CCol>
           <CCol>
             <CFormLabel for="basic-url">Loại tài khoản</CFormLabel>
@@ -146,6 +181,16 @@
             </CFormSelect>
           </CCol>
         </CRow>
+        <CFormLabel for="validationDefaultUsername">Địa chỉ</CFormLabel>
+        <CInputGroup class="has-validation">
+          <CFormInput
+            id="validationDefaultUsername"
+            aria-describedby="inputGroupPrepend"
+            feedbackInvalid="Please choose a username."
+            v-model="user.address"
+            required
+          />
+        </CInputGroup>
         <CFormLabel for="basic-url">Cho phép quản lý các nhà kính:</CFormLabel>
         <CRow v-for="item in (1, 2, 3)" :key="item">
           <CInputGroup class="mb-3">
@@ -187,7 +232,7 @@
       >
         Close
       </CButton>
-      <CButton color="primary">Save changes</CButton>
+      <CButton color="primary" @click="btnAddUserOnClick">Save changes</CButton>
     </CModalFooter>
   </CModal>
 </template>
@@ -200,23 +245,6 @@ import avatar1 from '@/assets/images/avatars/1.jpg'
 export default {
   name: 'ManageHomeList',
   components: {},
-  methods: {
-    /**
-     * Mở dialog thêm tài khoản quản lý nhà kính
-     * Author: Trần Phú Quân
-     */
-    btnAddUserOnClick() {
-      //this.formMode = 0
-      this.showDialog(true)
-    },
-    /**
-     * Hàm mở (đóng) dialog
-     * Author: Trần Phú Quân
-     */
-    showDialog(isShow) {
-      this.IsShowDialog = isShow
-    },
-  },
   data() {
     return {
       // Biến xác định dialog mở hay đóng
@@ -227,7 +255,44 @@ export default {
       visible: true,
       visibleVerticallyCenteredDemo: false,
       tableUser: [],
+      user: {
+        name: '',
+        email: '',
+        password: '',
+        address: '',
+        phone: '',
+      },
     }
+  },
+  methods: {
+    /**
+     * Mở dialog thêm tài khoản quản lý nhà kính
+     * Author: Trần Phú Quân
+     */
+    async btnAddUserOnClick() {
+      //this.formMode = 0
+      console.log(this.user.name)
+      await axios.post('http://localhost:8000/user/register', {
+        name: this.user.name,
+        email: this.user.email,
+        password: this.user.password,
+        address: this.user.address,
+        phone: this.user.phone,
+      })
+      this.showDialog(true)
+    },
+    async btnDeleteUserOnClick(id) {
+      console.log('id ', id)
+      await axios.delete(`http://localhost:8000/user/${id}`)
+      this.showDialog(true)
+    },
+    /**
+     * Hàm mở (đóng) dialog
+     * Author: Trần Phú Quân
+     */
+    showDialog(isShow) {
+      this.IsShowDialog = isShow
+    },
   },
   async mounted() {
     const response = await axios.get('http://localhost:8000/user')
@@ -243,6 +308,7 @@ export default {
           phone: item.phone,
         },
         address: item.address,
+        id: item._id,
       }
       key++
     })

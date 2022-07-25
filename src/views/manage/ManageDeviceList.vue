@@ -4,7 +4,7 @@
       <CCard class="mb-4">
         <CHeader>
           <CContainer fluid>
-            <CHeaderBrand href="#">Danh sách nhà thông minh</CHeaderBrand>
+            <CHeaderBrand href="#">Danh sách nhà kính</CHeaderBrand>
             <CHeaderToggler @click="visible = !visible" />
             <CCollapse class="header-collapse" :visible="visible">
               <form class="d-flex">
@@ -32,7 +32,9 @@
               <CTableRow>
                 <CTableHeaderCell class="text-center">STT</CTableHeaderCell>
                 <CTableHeaderCell>Tên thiết bị</CTableHeaderCell>
-                <CTableHeaderCell class="text-center">Serial</CTableHeaderCell>
+                <CTableHeaderCell class="text-center"
+                  >Mã số nhà</CTableHeaderCell
+                >
                 <CTableHeaderCell class="text-center"
                   >Được lắp đặt ở</CTableHeaderCell
                 >
@@ -86,33 +88,39 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'ManageHomeList',
   components: {},
   data() {
     return {
       visible: true,
+      tableSmartHome: [],
     }
   },
-  setup() {
-    const tableSmartHome = [
-      {
+  async mounted() {
+    const response = await axios.get('http://localhost:8000/device')
+    const results = response.data.content
+    const tableSmartHome = []
+    let key = 0
+    results.map((item) => {
+      tableSmartHome[key] = {
         user: {
-          name: 'Quạt điện',
-          serial: 'dfadfdfdsf42343432432',
-          address: 'Phòng 1, VinHome Royal City',
+          name: item.name,
+          serial: item._id,
+          address: item._id,
         },
         usage: {
           value: Math.round((40 / 100) * 100),
           color: 'success',
         },
-        activity: false,
-      },
-    ]
-
-    return {
-      tableSmartHome,
-    }
+        activity: item.status,
+      }
+      key++
+    })
+    console.log(tableSmartHome)
+    this.tableSmartHome = tableSmartHome
+    return { tableSmartHome }
   },
 }
 </script>

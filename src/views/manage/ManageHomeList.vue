@@ -39,7 +39,7 @@
                 <CTableHeaderCell>Tên nhà thông minh</CTableHeaderCell>
                 <CTableHeaderCell class="text-center">Địa chỉ</CTableHeaderCell>
                 <CTableHeaderCell class="text-center"
-                  >Số thiết bị đang hoạt động</CTableHeaderCell
+                  >Mã định danh của nhà kính</CTableHeaderCell
                 >
                 <CTableHeaderCell class="text-center"
                   >Nhiệt độ</CTableHeaderCell
@@ -59,27 +59,12 @@
                   <div>{{ item.user.name }}</div>
                 </CTableDataCell>
                 <CTableDataCell>
-                  <div>{{ item.user.name }}</div>
+                  <div>{{ item.user.address }}</div>
                 </CTableDataCell>
                 <CTableDataCell class="text-center">
                   <div class="small text-medium-emphasis">
                     {{ item.user.registered }}
                   </div>
-                </CTableDataCell>
-                <CTableDataCell class="text-center">
-                  <div>{{ item.user.address }}</div>
-                </CTableDataCell>
-                <CTableDataCell class="text-center">
-                  <div class="clearfix">
-                    <div class="float-start">
-                      <strong>{{ item.usage.value }}%</strong>
-                    </div>
-                  </div>
-                  <CProgress
-                    thin
-                    :color="item.usage.color"
-                    :value="item.usage.value"
-                  />
                 </CTableDataCell>
                 <CTableDataCell class="text-center">
                   <strong>{{ item.usage.temperature }} &ordm; C</strong>
@@ -260,7 +245,7 @@ export default {
       tableSmartHome[key] = {
         user: {
           name: item.name,
-          registered: item.device.length,
+          registered: item._id,
           address: item.address,
         },
         usage: {
