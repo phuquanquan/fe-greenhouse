@@ -26,7 +26,7 @@
             </CCol>
           </CRow>
           <CRow>
-            <MainChartExample
+            <MainChart
               style="height: 300px; max-height: 300px; margin-top: 40px"
             />
           </CRow>
@@ -65,9 +65,9 @@
 </template>
 
 <script>
-import MainChartExample from '../charts/MainChartExample.vue'
+import MainChart from '../charts/MainChart.vue'
 export default {
   name: 'WidgetsStatsA',
-  components: { MainChartExample },
+  components: { MainChart },
 }
 </script>

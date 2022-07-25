@@ -17,6 +17,11 @@
                   Search
                 </button>
                 <CButton
+                  @click="
+                    () => {
+                      visibleVerticallyCentered = true
+                    }
+                  "
                   component="input"
                   type="button"
                   color="success"
@@ -83,6 +88,104 @@
       </CCard>
     </CCol>
   </CRow>
+
+  <!--Modal-->
+  <CModal
+    size="xl"
+    alignment="center"
+    :visible="visibleVerticallyCentered"
+    @close="
+      () => {
+        visibleVerticallyCentered = false
+      }
+    "
+  >
+    <CModalHeader>
+      <CModalTitle>Thêm thiết bị</CModalTitle>
+    </CModalHeader>
+    <CModalBody>
+      <CForm class="row g-3">
+        <CRow>
+          <CCol>
+            <CFormLabel for="validationDefaultUsername"
+              >Tên thiết bị</CFormLabel
+            >
+            <CFormSelect
+              aria-label="Default select example"
+              :options="[
+                'Mở menu chọn này',
+                { label: 'Bóng đèn', value: '1' },
+                { label: 'Quạt điện', value: '2' },
+                { label: 'Máy bơm', value: '3' },
+              ]"
+            >
+            </CFormSelect>
+          </CCol>
+          <CCol class="position-relative">
+            <CFormLabel for="validationTooltip05">Serial Code</CFormLabel>
+            <CFormInput id="validationTooltip05" required />
+            <CFormFeedback tooltip invalid>
+              Please provide a valid zip.
+            </CFormFeedback>
+          </CCol>
+          <CCol>
+            <CFormLabel for="basic-url">Loại tài khoản</CFormLabel>
+            <CFormSelect
+              aria-label="Default select example"
+              :options="[
+                'Mở menu chọn này',
+                { label: 'Bóng đèn', value: '1' },
+                { label: 'Quạt điện', value: '2' },
+                { label: 'Máy bơm', value: '3' },
+              ]"
+            >
+            </CFormSelect>
+          </CCol>
+        </CRow>
+        <CFormLabel for="basic-url">Cho phép quản lý các nhà kính:</CFormLabel>
+        <CRow v-for="item in (1, 2, 3)" :key="item">
+          <CInputGroup class="mb-3">
+            <CInputGroupText>
+              <CFormCheck
+                type="checkbox"
+                value=""
+                aria-label="Checkbox for following text input"
+              />
+            </CInputGroupText>
+            <CFormInput
+              aria-label="Text input with checkbox"
+              disabled="false"
+              value="Nhà kính 1. Đ/c: Tầng 4, phòng 2, 40 ngõ 50 phố Xã Đàn, Phương Liên, Đống Đa, Hà Nội"
+            />
+          </CInputGroup>
+        </CRow>
+        <CRow>
+          <CCol xs="12">
+            <CFormCheck
+              feedbackInvalid="You must agree before submitting."
+              id="invalidCheck"
+              label="Xác nhận cấp quyền cho tài khoản người dùng này quản lý nhà kính"
+              required
+              type="checkbox"
+            />
+          </CCol>
+        </CRow>
+      </CForm>
+    </CModalBody>
+    <CModalFooter>
+      <CButton
+        color="secondary"
+        @click="
+          () => {
+            visibleVerticallyCentered = false
+          }
+        "
+      >
+        Close
+      </CButton>
+      <CButton color="primary">Save changes</CButton>
+    </CModalFooter>
+  </CModal>
 </template>
 
 <script>
@@ -92,6 +195,7 @@ export default {
   data() {
     return {
       visible: true,
+      visibleVerticallyCentered: false,
     }
   },
   setup() {
@@ -116,3 +220,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.col {
+  padding-top: 16px;
+}
+</style>

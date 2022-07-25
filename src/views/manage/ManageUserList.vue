@@ -21,7 +21,7 @@
                 <CButton
                   @click="
                     () => {
-                      visibleVerticallyCenteredDemo = true
+                      visibleVerticallyCentered = true
                     }
                   "
                   component="input"
@@ -98,10 +98,10 @@
   <CModal
     size="xl"
     alignment="center"
-    :visible="visibleVerticallyCenteredDemo"
+    :visible="visibleVerticallyCentered"
     @close="
       () => {
-        visibleVerticallyCenteredDemo = false
+        visibleVerticallyCentered = false
       }
     "
   >
@@ -181,7 +181,7 @@
         color="secondary"
         @click="
           () => {
-            visibleVerticallyCenteredDemo = false
+            visibleVerticallyCentered = false
           }
         "
       >
@@ -200,23 +200,7 @@ import avatar1 from '@/assets/images/avatars/1.jpg'
 export default {
   name: 'ManageHomeList',
   components: {},
-  methods: {
-    /**
-     * Mở dialog thêm tài khoản quản lý nhà kính
-     * Author: Trần Phú Quân
-     */
-    btnAddUserOnClick() {
-      //this.formMode = 0
-      this.showDialog(true)
-    },
-    /**
-     * Hàm mở (đóng) dialog
-     * Author: Trần Phú Quân
-     */
-    showDialog(isShow) {
-      this.IsShowDialog = isShow
-    },
-  },
+  methods: {},
   data() {
     return {
       // Biến xác định dialog mở hay đóng
@@ -225,7 +209,7 @@ export default {
       formMode: 0,
       //FormMode,
       visible: true,
-      visibleVerticallyCenteredDemo: false,
+      visibleVerticallyCentered: false,
       tableUser: [],
     }
   },
