@@ -1,127 +1,219 @@
 <template>
-  <div>
-    <!-- Loading -->
-    <!-- <Loading
+  <!-- Loading -->
+  <!-- <Loading
     :active="isLoading"
     :can-cancel="false"
     :color="color"
     :is-full-page="fullPage"
   /> -->
-    <CRow>
-      <CCol :md="12">
-        <CCard class="mb-4">
-          <CHeader>
-            <CContainer fluid>
-              <CHeaderBrand href="#">Danh sách nhà thông minh</CHeaderBrand>
-              <CHeaderToggler @click="visible = !visible" />
-              <CCollapse class="header-collapse" :visible="visible">
-                <form class="d-flex">
-                  <input
-                    class="form-control me-2"
-                    type="search"
-                    placeholder="Nhập vào đây để tìm"
-                  />
-                  <button class="btn btn-outline-success me-md-2" type="submit">
-                    Search
-                  </button>
-                  <CButton
-                    @click="
-                      () => {
-                        visibleVerticallyCentered = true
-                      }
-                    "
-                    component="input"
-                    type="button"
-                    color="success"
-                    value="Thêm nhà thông minh"
-                  />
-                </form>
-              </CCollapse>
-            </CContainer>
-          </CHeader>
-          <CCardBody>
-            <CTable align="middle" class="mb-0 border" hover responsive>
-              <CTableHead color="light">
-                <CTableRow>
-                  <CTableHeaderCell class="text-center">STT</CTableHeaderCell>
-                  <CTableHeaderCell>Tên nhà thông minh</CTableHeaderCell>
-                  <CTableHeaderCell class="text-center"
-                    >Địa chỉ</CTableHeaderCell
-                  >
-                  <CTableHeaderCell class="text-center"
-                    >Số thiết bị đang hoạt động</CTableHeaderCell
-                  >
-                  <CTableHeaderCell class="text-center"
-                    >Nhiệt độ</CTableHeaderCell
-                  >
-                  <CTableHeaderCell class="text-center">Độ ẩm</CTableHeaderCell>
-                  <CTableHeaderCell class="text-center"
-                    >Chức năng</CTableHeaderCell
-                  >
-                </CTableRow>
-              </CTableHead>
-              <CTableBody>
-                <CTableRow
-                  v-for="(item, key) in tableSmartHome"
-                  :key="item.name"
+  <CRow>
+    <CCol :md="12">
+      <CCard class="mb-4">
+        <CHeader>
+          <CContainer fluid>
+            <CHeaderBrand href="#">Danh sách nhà thông minh</CHeaderBrand>
+            <CHeaderToggler @click="visible = !visible" />
+            <CCollapse class="header-collapse" :visible="visible">
+              <form class="d-flex">
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Nhập vào đây để tìm"
+                />
+                <button class="btn btn-outline-success me-md-2" type="submit">
+                  Search
+                </button>
+                <CButton
+                  @click="
+                    () => {
+                      visibleVerticallyCentered = true
+                    }
+                  "
+                  component="input"
+                  type="button"
+                  color="success"
+                  value="Thêm nhà thông minh"
+                />
+              </form>
+            </CCollapse>
+          </CContainer>
+        </CHeader>
+        <CCardBody>
+          <CTable align="middle" class="mb-0 border" hover responsive>
+            <CTableHead color="light">
+              <CTableRow>
+                <CTableHeaderCell class="text-center">STT</CTableHeaderCell>
+                <CTableHeaderCell>Tên nhà thông minh</CTableHeaderCell>
+                <CTableHeaderCell class="text-center">Địa chỉ</CTableHeaderCell>
+                <CTableHeaderCell class="text-center"
+                  >Số thiết bị đang hoạt động</CTableHeaderCell
                 >
-                  <CTableDataCell class="text-center">
-                    {{ key + 1 }}
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    <div>{{ item.user.name }}</div>
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    <div>{{ item.user.name }}</div>
-                  </CTableDataCell>
-                  <CTableDataCell class="text-center">
-                    <div class="small text-medium-emphasis">
-                      {{ item.user.registered }}
+                <CTableHeaderCell class="text-center"
+                  >Nhiệt độ</CTableHeaderCell
+                >
+                <CTableHeaderCell class="text-center">Độ ẩm</CTableHeaderCell>
+                <CTableHeaderCell class="text-center"
+                  >Chức năng</CTableHeaderCell
+                >
+              </CTableRow>
+            </CTableHead>
+            <CTableBody>
+              <CTableRow v-for="(item, key) in tableSmartHome" :key="item.name">
+                <CTableDataCell class="text-center">
+                  {{ key + 1 }}
+                </CTableDataCell>
+                <CTableDataCell>
+                  <div>{{ item.user.name }}</div>
+                </CTableDataCell>
+                <CTableDataCell>
+                  <div>{{ item.user.name }}</div>
+                </CTableDataCell>
+                <CTableDataCell class="text-center">
+                  <div class="small text-medium-emphasis">
+                    {{ item.user.registered }}
+                  </div>
+                </CTableDataCell>
+                <CTableDataCell class="text-center">
+                  <div>{{ item.user.address }}</div>
+                </CTableDataCell>
+                <CTableDataCell class="text-center">
+                  <div class="clearfix">
+                    <div class="float-start">
+                      <strong>{{ item.usage.value }}%</strong>
                     </div>
-                  </CTableDataCell>
-                  <CTableDataCell class="text-center">
-                    <div>{{ item.user.address }}</div>
-                  </CTableDataCell>
-                  <CTableDataCell class="text-center">
-                    <div class="clearfix">
-                      <div class="float-start">
-                        <strong>{{ item.usage.value }}%</strong>
-                      </div>
-                    </div>
-                    <CProgress
-                      thin
-                      :color="item.usage.color"
-                      :value="item.usage.value"
-                    />
-                  </CTableDataCell>
-                  <CTableDataCell class="text-center">
-                    <strong>{{ item.usage.temperature }} &ordm; C</strong>
-                  </CTableDataCell>
-                  <CTableDataCell class="text-center">
-                    <strong>{{ item.usage.humidity }}%</strong>
-                  </CTableDataCell>
-                  <CTableDataCell class="text-center">
-                    <CButtonGroup
-                      role="group"
-                      aria-label="Button group with nested dropdown"
-                    >
-                      <CButton color="success">Điều khiển</CButton>
-                      <CButton color="secondary">Sửa</CButton>
-                      <CButton color="primary">Xóa</CButton>
-                    </CButtonGroup>
-                  </CTableDataCell>
-                </CTableRow>
-                <CTableRow> </CTableRow>
-              </CTableBody>
-            </CTable>
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
+                  </div>
+                  <CProgress
+                    thin
+                    :color="item.usage.color"
+                    :value="item.usage.value"
+                  />
+                </CTableDataCell>
+                <CTableDataCell class="text-center">
+                  <strong>{{ item.usage.temperature }} &ordm; C</strong>
+                </CTableDataCell>
+                <CTableDataCell class="text-center">
+                  <strong>{{ item.usage.humidity }}%</strong>
+                </CTableDataCell>
+                <CTableDataCell class="text-center">
+                  <CButtonGroup
+                    role="group"
+                    aria-label="Button group with nested dropdown"
+                  >
+                    <CButton color="success">Điều khiển</CButton>
+                    <CButton color="secondary">Sửa</CButton>
+                    <CButton color="primary">Xóa</CButton>
+                  </CButtonGroup>
+                </CTableDataCell>
+              </CTableRow>
+              <CTableRow> </CTableRow>
+            </CTableBody>
+          </CTable>
+        </CCardBody>
+      </CCard>
+    </CCol>
+  </CRow>
 
-    <!--Modal-->
-    <HomeDetail v-if="visibleVerticallyCentered" />
-  </div>
+  <!--Modal-->
+  <CModal
+    size="xl"
+    alignment="center"
+    :visible="visibleVerticallyCentered"
+    @close="
+      () => {
+        visibleVerticallyCentered = false
+      }
+    "
+  >
+    <CModalHeader>
+      <CModalTitle>Thêm nhà kính</CModalTitle>
+    </CModalHeader>
+    <CModalBody>
+      <CForm class="row g-3">
+        <CRow>
+          <CCol class="position-relative">
+            <CFormLabel for="validationTooltipUsername">Mã nhà kính</CFormLabel>
+            <CInputGroup class="has-validation">
+              <CInputGroupText id="inputGroupPrepend">@</CInputGroupText>
+              <CFormInput
+                id="validationTooltipUsername"
+                value=""
+                aria-describedby="inputGroupPrepend"
+                disabled="false"
+                required
+              />
+              <CFormFeedback tooltip invalid>
+                Please choose a username.
+              </CFormFeedback>
+            </CInputGroup>
+          </CCol>
+          <CCol class="position-relative">
+            <CFormLabel for="validationTooltip05">Tên nhà kính</CFormLabel>
+            <CFormInput id="validationTooltip05" required />
+            <CFormFeedback tooltip invalid>
+              Please provide a valid zip.
+            </CFormFeedback>
+          </CCol>
+          <CCol class="position-relative">
+            <CFormLabel for="validationTooltip05">Diện tích</CFormLabel>
+            <CFormInput id="validationTooltip05" required />
+            <CFormFeedback tooltip invalid>
+              Please provide a valid zip.
+            </CFormFeedback>
+          </CCol>
+        </CRow>
+        <CRow>
+          <CCol class="position-relative">
+            <CFormLabel for="validationTooltip05">Địa chỉ</CFormLabel>
+            <CFormInput id="validationTooltip05" required />
+            <CFormFeedback tooltip invalid>
+              Please provide a valid zip.
+            </CFormFeedback>
+          </CCol>
+        </CRow>
+        <CFormLabel for="basic-url">Các thiết bị có trong nhà:</CFormLabel>
+        <CRow v-for="item in (1, 2, 3, 4, 5)" :key="item">
+          <CInputGroup class="mb-3">
+            <CInputGroupText
+              style="width: 155px; display: block"
+              id="basic-addon3"
+              >{{ listDevices[item - 1] }}</CInputGroupText
+            >
+            <CFormInput
+              placeholder="Nhập serial thiết bị tại đây để kết nối"
+              aria-label="Text input with dropdown button"
+            />
+            <CButton type="button" color="primary" variant="outline"
+              >Connect</CButton
+            >
+          </CInputGroup>
+        </CRow>
+        <CRow>
+          <CCol xs="12">
+            <CFormCheck
+              feedbackInvalid="You must agree before submitting."
+              id="invalidCheck"
+              label="Xác nhận thêm mới/thay đổi nhà kính thông minh"
+              required
+              type="checkbox"
+            />
+          </CCol>
+        </CRow>
+      </CForm>
+    </CModalBody>
+    <CModalFooter>
+      <CButton
+        color="secondary"
+        @click="
+          () => {
+            visibleVerticallyCentered = false
+          }
+        "
+      >
+        Close
+      </CButton>
+      <CButton color="primary">Save changes</CButton>
+    </CModalFooter>
+  </CModal>
 </template>
 
 <script>
@@ -130,10 +222,9 @@ import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 // import $ from 'jquery'
 import { FormMode } from '@/enums/GEnum'
-import HomeDetail from './detail/HomeDetail.vue'
 export default {
   name: 'ManageHomeList',
-  components: { Loading, HomeDetail },
+  components: { Loading },
   watch: {
     /**
      * Khi giá trị ô tìm kiếm thay đổi sẽ load lại danh sách nhân viên tương ứng
