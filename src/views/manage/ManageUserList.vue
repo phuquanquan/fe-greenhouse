@@ -191,23 +191,6 @@
             required
           />
         </CInputGroup>
-        <CFormLabel for="basic-url">Cho phép quản lý các nhà kính:</CFormLabel>
-        <CRow v-for="item in (1, 2, 3)" :key="item">
-          <CInputGroup class="mb-3">
-            <CInputGroupText>
-              <CFormCheck
-                type="checkbox"
-                value=""
-                aria-label="Checkbox for following text input"
-              />
-            </CInputGroupText>
-            <CFormInput
-              aria-label="Text input with checkbox"
-              disabled="false"
-              value="Nhà kính 1. Đ/c: Tầng 4, phòng 2, 40 ngõ 50 phố Xã Đàn, Phương Liên, Đống Đa, Hà Nội"
-            />
-          </CInputGroup>
-        </CRow>
         <CRow>
           <CCol xs="12">
             <CFormCheck

@@ -160,30 +160,6 @@
           </CCol>
         </CRow>
         <CFormLabel for="basic-url">Các thiết bị có trong nhà:</CFormLabel>
-        <CRow v-for="item in (1, 2, 3, 4, 5)" :key="item">
-          <CInputGroup class="mb-3">
-            <CDropdown variant="input-group">
-              <CDropdownToggle color="secondary" variant="outline"
-                >Chọn thiết bị</CDropdownToggle
-              >
-              <CDropdownMenu>
-                <CDropdownItem>Máy bơm</CDropdownItem>
-                <CDropdownItem>Đèn điện</CDropdownItem>
-                <CDropdownItem>Quạt điện</CDropdownItem>
-                <CDropdownItem>CẢm biến nhiệt độ</CDropdownItem>
-                <CDropdownItem>Cảm biến độ ẩm</CDropdownItem>
-                <CDropdownDivider />
-              </CDropdownMenu>
-            </CDropdown>
-            <CFormInput
-              placeholder="Nhập serial thiết bị tại đây để kết nối"
-              aria-label="Text input with dropdown button"
-            />
-            <CButton type="button" color="primary" variant="outline"
-              >Connect</CButton
-            >
-          </CInputGroup>
-        </CRow>
         <CRow>
           <CCol xs="12">
             <CFormCheck
