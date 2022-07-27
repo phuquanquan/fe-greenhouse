@@ -10,8 +10,8 @@
 
 <script>
 import Weather from './widgets/Weather.vue'
-import WidgetsStatsA from './widgets/WidgetsStatsTypeA.vue'
-import WidgetsStatsD from './widgets/WidgetsStatsTypeD.vue'
+import WidgetsStatsA from './widgets/WidgetsA.vue'
+import WidgetsStatsD from './widgets/WidgetsD.vue'
 
 export default {
   name: 'Dashboard',

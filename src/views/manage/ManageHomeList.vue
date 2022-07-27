@@ -159,7 +159,6 @@
             </CFormFeedback>
           </CCol>
         </CRow>
-        <CFormLabel for="basic-url">Các thiết bị có trong nhà:</CFormLabel>
         <CRow>
           <CCol xs="12">
             <CFormCheck
@@ -242,13 +241,6 @@ export default {
       })
       this.showDialog(true)
     },
-    /**
-     * Hàm mở (đóng) dialog
-     * Author: Trần Phú Quân
-     */
-    showDialog(isShow) {
-      this.IsShowDialog = isShow
-    },
   },
 
   async mounted() {
@@ -285,5 +277,6 @@ export default {
 <style lang="scss" scoped>
 .col {
   padding-top: 16px;
+  padding-bottom: 16px;
 }
 </style>

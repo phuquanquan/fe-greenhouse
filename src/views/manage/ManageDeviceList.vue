@@ -17,6 +17,11 @@
                   Search
                 </button>
                 <CButton
+                  @click="
+                    () => {
+                      visibleVerticallyCenteredDemo = true
+                    }
+                  "
                   component="input"
                   type="button"
                   color="success"
@@ -85,6 +90,102 @@
       </CCard>
     </CCol>
   </CRow>
+
+  <!--Modal-->
+  <CModal
+    size="xl"
+    alignment="center"
+    :visible="visibleVerticallyCenteredDemo"
+    @close="
+      () => {
+        visibleVerticallyCenteredDemo = false
+      }
+    "
+  >
+    <CModalHeader>
+      <CModalTitle>Thêm nhà kính</CModalTitle>
+    </CModalHeader>
+    <CModalBody>
+      <CForm class="row g-3">
+        <CRow>
+          <CCol class="position-relative">
+            <CFormLabel for="validationTooltipUsername">Mã nhà kính</CFormLabel>
+            <CInputGroup class="has-validation">
+              <CInputGroupText id="inputGroupPrepend">@</CInputGroupText>
+              <CFormInput
+                id="validationTooltipUsername"
+                value=""
+                aria-describedby="inputGroupPrepend"
+                required
+              />
+              <CFormFeedback tooltip invalid>
+                Please choose a username.
+              </CFormFeedback>
+            </CInputGroup>
+          </CCol>
+          <CCol class="position-relative">
+            <CFormLabel for="validationTooltip05">Tên nhà kính</CFormLabel>
+            <CFormInput
+              id="validationTooltip05"
+              v-model="house.name"
+              required
+            />
+            <CFormFeedback tooltip invalid>
+              Please provide a valid zip.
+            </CFormFeedback>
+          </CCol>
+          <CCol class="position-relative">
+            <CFormLabel for="validationTooltip05">Diện tích</CFormLabel>
+            <CFormInput
+              id="validationTooltip05"
+              v-model="house.areage"
+              required
+            />
+            <CFormFeedback tooltip invalid>
+              Please provide a valid zip.
+            </CFormFeedback>
+          </CCol>
+        </CRow>
+        <CRow>
+          <CCol class="position-relative">
+            <CFormLabel for="validationTooltip05">Địa chỉ</CFormLabel>
+            <CFormInput
+              id="validationTooltip05"
+              v-model="house.address"
+              required
+            />
+            <CFormFeedback tooltip invalid>
+              Please provide a valid zip.
+            </CFormFeedback>
+          </CCol>
+        </CRow>
+        <CRow>
+          <CCol xs="12">
+            <CFormCheck
+              feedbackInvalid="You must agree before submitting."
+              id="invalidCheck"
+              label="Xác nhận thêm mới/thay đổi nhà kính thông minh"
+              required
+              type="checkbox"
+            />
+          </CCol>
+        </CRow>
+      </CForm>
+    </CModalBody>
+    <CModalFooter>
+      <CButton
+        color="secondary"
+        @click="
+          () => {
+            visibleVerticallyCenteredDemo = false
+          }
+        "
+      >
+        Close
+      </CButton>
+      <CButton @click="btnAddUserOnClick" color="primary">Save changes</CButton>
+    </CModalFooter>
+  </CModal>
 </template>
 
 <script>
@@ -95,6 +196,7 @@ export default {
   data() {
     return {
       visible: true,
+      visibleVerticallyCenteredDemo: false,
       tableSmartHome: [],
     }
   },
@@ -137,13 +239,6 @@ export default {
         device: this.house.device,
       })
       this.showDialog(true)
-    },
-    /**
-     * Hàm mở (đóng) dialog
-     * Author: Trần Phú Quân
-     */
-    showDialog(isShow) {
-      this.IsShowDialog = isShow
     },
   },
 }

@@ -1,7 +1,7 @@
 import {
-  cibFacebook,
+  cibApacheAirflow,
   cibTwitter,
-  cibLinkedin,
+  cibCodewars,
   cibFlickr,
   cibTumblr,
   cibXing,
@@ -147,9 +147,9 @@ export const iconsSet = Object.assign(
     cifPl,
   },
   {
-    cibFacebook,
+    cibApacheAirflow,
     cibTwitter,
-    cibLinkedin,
+    cibCodewars,
     cibFlickr,
     cibTumblr,
     cibXing,

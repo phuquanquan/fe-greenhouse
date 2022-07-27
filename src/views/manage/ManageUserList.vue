@@ -181,16 +181,18 @@
             </CFormSelect>
           </CCol>
         </CRow>
-        <CFormLabel for="validationDefaultUsername">Địa chỉ</CFormLabel>
-        <CInputGroup class="has-validation">
-          <CFormInput
-            id="validationDefaultUsername"
-            aria-describedby="inputGroupPrepend"
-            feedbackInvalid="Please choose a username."
-            v-model="user.address"
-            required
-          />
-        </CInputGroup>
+        <CRow>
+          <CFormLabel for="validationDefaultUsername">Địa chỉ</CFormLabel>
+          <CInputGroup class="has-validation">
+            <CFormInput
+              id="validationDefaultUsername"
+              aria-describedby="inputGroupPrepend"
+              feedbackInvalid="Please choose a username."
+              v-model="user.address"
+              required
+            />
+          </CInputGroup>
+        </CRow>
         <CRow>
           <CCol xs="12">
             <CFormCheck
@@ -222,7 +224,6 @@
 
 <script>
 import axios from 'axios'
-//import FormMode from '@/enums/GEmun'
 import avatar1 from '@/assets/images/avatars/1.jpg'
 
 export default {
@@ -269,13 +270,6 @@ export default {
       await axios.delete(`http://localhost:8000/user/${id}`)
       this.showDialog(true)
     },
-    /**
-     * Hàm mở (đóng) dialog
-     * Author: Trần Phú Quân
-     */
-    showDialog(isShow) {
-      this.IsShowDialog = isShow
-    },
   },
   async mounted() {
     const response = await axios.get('http://localhost:8000/user')
@@ -305,5 +299,6 @@ export default {
 <style lang="scss" scoped>
 .col {
   padding-top: 16px;
+  padding-bottom: 16px;
 }
 </style>

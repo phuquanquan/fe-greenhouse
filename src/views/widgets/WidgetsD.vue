@@ -5,12 +5,12 @@
         class="mb-4"
         style="--cui-card-cap-bg: #3b5998"
         :values="[
-          { title: 'Tổng số quạt', value: '100' },
-          { title: 'Đang bật', value: '45' },
+          { title: 'Tổng số quạt', value: '10' },
+          { title: 'Đang bật', value: '5' },
         ]"
       >
         <template #icon
-          ><CIcon icon="cib-facebook" height="52" class="my-4 text-white"
+          ><CIcon icon="cib-apache-airflow" height="52" class="my-4 text-white"
         /></template>
       </CWidgetStatsD>
     </CCol>
@@ -19,12 +19,12 @@
         class="mb-4"
         style="--cui-card-cap-bg: #00aced"
         :values="[
-          { title: 'Tổng số bóng đèn', value: '973k' },
-          { title: 'Đang bật', value: '1.792' },
+          { title: 'Tổng số bóng đèn', value: '12' },
+          { title: 'Đang bật', value: '4' },
         ]"
       >
         <template #icon
-          ><CIcon icon="cib-twitter" height="52" class="my-4 text-white"
+          ><CIcon icon="cilLightbulb" height="52" class="my-4 text-white"
         /></template>
       </CWidgetStatsD>
     </CCol>
@@ -33,12 +33,12 @@
         class="mb-4"
         style="--cui-card-cap-bg: #4875b4"
         :values="[
-          { title: 'Tổng số máy bơm', value: '500' },
-          { title: 'Đang bật', value: '1.292' },
+          { title: 'Tổng số máy bơm', value: '13' },
+          { title: 'Đang bật', value: '10' },
         ]"
       >
         <template #icon
-          ><CIcon icon="cib-linkedin" height="52" class="my-4 text-white"
+          ><CIcon icon="cibCodewars" height="52" class="my-4 text-white"
         /></template>
       </CWidgetStatsD>
     </CCol>

@@ -15,18 +15,18 @@
               <CButtonGroup
                 class="float-end me-3"
                 role="group"
-                aria-label="Basic outlined example"
+                aria-label="Basic outlined "
               >
-                <CButton color="secondary" variant="outline">Day</CButton>
                 <CButton color="secondary" variant="outline" active
-                  >Month</CButton
+                  >Day</CButton
                 >
+                <CButton color="secondary" variant="outline">Month</CButton>
                 <CButton color="secondary" variant="outline">Year</CButton>
               </CButtonGroup>
             </CCol>
           </CRow>
           <CRow>
-            <MainChartExample
+            <MainChart
               style="height: 300px; max-height: 300px; margin-top: 40px"
             />
           </CRow>
@@ -65,9 +65,9 @@
 </template>
 
 <script>
-import MainChartExample from '../charts/MainChartExample.vue'
+import MainChart from '../charts/MainChart.vue'
 export default {
   name: 'WidgetsStatsA',
-  components: { MainChartExample },
+  components: { MainChart },
 }
 </script>
